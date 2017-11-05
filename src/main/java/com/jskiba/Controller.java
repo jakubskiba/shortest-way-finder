@@ -7,8 +7,8 @@ import java.util.*;
 public class Controller
 {
 
-    public void start(PrintStream out, InputStream in) throws InvalidInputException {
-        UserInterface UI = new UserInterface(out, in);
+    public void start(UserInterface ui) throws InvalidInputException {
+        UserInterface UI = ui;
 
         List<String> lines = UI.getData();
 
@@ -38,9 +38,12 @@ public class Controller
         checkVertexData(words);
         String node1Name = words[0];
         String node2Name = words[1];
-        Integer distance = Integer.valueOf(words[2]);
-
-        graph.createVertice(node1Name, node2Name, distance);
+        try {
+            Integer distance = Integer.parseInt(words[2]);
+            graph.createVertice(node1Name, node2Name, distance);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("Distance is to large! Given value: " + words[2]);
+        }
 
     }
 
@@ -57,11 +60,11 @@ public class Controller
 
     private void checkWordAmount(String[] words) throws InvalidInputException {
         if(words.length != 3) {
-            throw new InvalidInputException("Graph data should be in format: Node Node Distance");
+            throw new InvalidInputException("Graph data should be in format: Node Node Distance!");
         }
     }
 
-    public Node findNode(String name, Graph graph) throws InvalidInputException {
+    private Node findNode(String name, Graph graph) throws InvalidInputException {
         Optional<Node> nodeBuffer = graph.getNode(name);
         if(nodeBuffer.isPresent()) {
             return nodeBuffer.get();
