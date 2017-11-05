@@ -1,7 +1,5 @@
 package com.jskiba;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.*;
 
 public class Controller
@@ -40,7 +38,7 @@ public class Controller
         String node2Name = words[1];
         try {
             Integer distance = Integer.parseInt(words[2]);
-            graph.createVertice(node1Name, node2Name, distance);
+            graph.createVertex(node1Name, node2Name, distance);
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Distance is to large! Given value: " + words[2]);
         }

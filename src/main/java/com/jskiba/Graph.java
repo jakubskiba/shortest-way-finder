@@ -20,7 +20,7 @@ public class Graph {
         return node.get();
     }
 
-    public Vertex createVertice(String node1Name, String node2Name, Integer value) {
+    public Vertex createVertex(String node1Name, String node2Name, Integer value) {
 
         Node node1 = this.createNode(node1Name);
         Node node2 = this.createNode(node2Name);
@@ -71,7 +71,7 @@ public class Graph {
     }
 
     private void computeDistances(Node nearestNode) {
-        for(Vertex vertex : getAllNeightbors(nearestNode)) {
+        for(Vertex vertex : getAllNeighbors(nearestNode)) {
 
             Node oppositeNode = vertex.getOppositeNode(nearestNode);
             Integer newDistance = nearestNode.getDistance() + vertex.getValue();
@@ -85,7 +85,7 @@ public class Graph {
 
 
 
-    public List<Vertex> getAllNeightbors(Node node) {
+    private List<Vertex> getAllNeighbors(Node node) {
         return this.vertices.stream()
                             .filter(vertex -> vertex.hasNode(node))
                             .collect(Collectors.toList());
