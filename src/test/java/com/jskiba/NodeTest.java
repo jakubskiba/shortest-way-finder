@@ -3,6 +3,9 @@ package com.jskiba;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NodeTest {
@@ -68,6 +71,26 @@ class NodeTest {
         Node someNode = new Node("Paris");
         this.node.setPreviousNode(someNode);
         assertTrue(this.node.hasPreviousNode());
+    }
+
+    @Test
+    void testDefaultRoute() {
+        List<String> expectedRoute = new ArrayList<>();
+        expectedRoute.add("Warsaw");
+
+        assertEquals(expectedRoute, this.node.getRoute());
+    }
+
+    @Test
+    void testRouteAfterSetPreviousNode() {
+        List<String> expectedRoute = new ArrayList<>();
+        expectedRoute.add("Paris");
+        expectedRoute.add("Warsaw");
+
+        Node someNode = new Node("Paris");
+        this.node.setPreviousNode(someNode);
+
+        assertEquals(expectedRoute, this.node.getRoute());
     }
 
     @Test
